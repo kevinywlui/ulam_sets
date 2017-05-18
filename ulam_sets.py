@@ -24,6 +24,16 @@ def max_norm(v):
     return v.norm(p=infinity)
 
 
+def candidates_max_norm(m):
+    """
+    Return a list of vectors of length m.
+    """
+    candidates = [vector([m, i]) for i in range(1, m+1)]
+    candidates += [vector([i, m]) for i in range(1, m)]
+
+    return candidates
+
+
 def compute_ulam(n, init_vectors, norm_func=max_norm):
     """
     Return a set containing at least the first n ulam elements. This only works
@@ -50,8 +60,7 @@ def compute_ulam(n, init_vectors, norm_func=max_norm):
         while not new_elements:
             # candidates is the set of vectors of length m that can be written
             # as a positive integral combination of the initial vectors.
-            candidates = [vector([m, i]) for i in range(1, m+1)]
-            candidates += [vector([i, m]) for i in range(1, m)]
+            candidates = candidates_max_norm(m)
 
             # filter candidates that passed
             new_elements = [v for v in candidates
