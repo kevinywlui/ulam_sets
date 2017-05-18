@@ -1,3 +1,5 @@
+from sage.all import *
+
 
 def new_membership_test(old_ulam, candidate):
     """
@@ -17,8 +19,10 @@ def new_membership_test(old_ulam, candidate):
     else:
         return False
 
+
 def max_norm(v):
     return v.norm(p=infinity)
+
 
 def compute_ulam(n, init_vectors, norm_func=max_norm):
     """
@@ -46,8 +50,8 @@ def compute_ulam(n, init_vectors, norm_func=max_norm):
         while not new_elements:
             # candidates is the set of vectors of length m that can be written
             # as a positive integral combination of the initial vectors.
-            candidates = [vector([m,i]) for i in range(1,m+1)]
-            candidates += [vector([i,m]) for i in range(1,m)]
+            candidates = [vector([m, i]) for i in range(1, m+1)]
+            candidates += [vector([i, m]) for i in range(1, m)]
 
             # filter candidates that passed
             new_elements = [v for v in candidates
@@ -60,3 +64,13 @@ def compute_ulam(n, init_vectors, norm_func=max_norm):
         ulam_set += new_elements
 
     return ulam_set
+
+
+def main():
+    init_vectors = [[1, 0], [0, 1]]
+    # compute_ulam(100, init_vectors)
+    print(compute_ulam(100, init_vectors))
+
+
+if __name__ == "__main__":
+    main()
